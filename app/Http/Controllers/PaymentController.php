@@ -32,16 +32,16 @@ class PaymentController extends Controller
          ]);
 
         $data = array();
-        for ($i=0; $i < count($buruh) ; $i++) { 
+        foreach ($buruh as $key => $value) {
             $data[] =[
                 'payment_id' => $payment->id,
-                'laborer_name' => $buruh[$i]['nama'],
-                'persentase' => $buruh[$i]['bonus'],
+                'laborer_name' => $value['nama'],
+                'persentase' => $value['bonus'],
                 'created_at'=>date('Y-m-d H:i:s'),
                 'updated_at'=> date('Y-m-d H:i:s')
-               ];             
-        }
-    
+               ];      
+           }
+           
         PaymentDetail::insert($data);
        
         return redirect('/payment')->with('Completed', 'Data has been saved!');
